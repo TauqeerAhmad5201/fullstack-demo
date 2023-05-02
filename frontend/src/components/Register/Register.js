@@ -1,6 +1,24 @@
 import React from 'react'
 import './Register.css'
+import { useState } from 'react'
+
 export default function Register() {
+  
+    const [user, setUser] = useState({
+      name: "", 
+      email: "", 
+      password: "", 
+      reEnterPassword: ""
+    })
+   
+    const handleChange = e => {
+      const {name, value} = e.target    // name and value we are taking from input field
+      console.log(name, value)            // consoling the same
+      setUser({
+        ...user, [name]:value           // now changing the input field name to the value fetch
+      })
+
+    }
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -16,14 +34,18 @@ export default function Register() {
               <label htmlFor="fname" className="block text-sm font-medium leading-6 text-gray-900">
                 Full Name
               </label>
+              {/* {console.log("user", user)} */}
               <div className="mt-2">
                 <input
                   id="fname"
-                  name="fname"
+                  name="fullname"
+                  value={user.name}
                   type="text"
+                  placeholder="Your name"
                   autoComplete="fname"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -35,10 +57,12 @@ export default function Register() {
                 <input
                   id="email"
                   name="email"
+                  value={user.email}
                   type="email"
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -53,10 +77,12 @@ export default function Register() {
                 <input
                   id="password"
                   name="password"
+                  value={user.password}
                   type="password"
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -69,11 +95,13 @@ export default function Register() {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
+                  name="reEnterPassword"
+                  value={user.reEnterPassword}
                   type="password"
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  onChange={handleChange}
                 />
               </div>
             </div>
