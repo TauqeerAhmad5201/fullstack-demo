@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Register.css'
 export default function Register() {
   return (
     <>
@@ -86,7 +86,7 @@ export default function Register() {
                 Register
               </button>
             </div>
-            <div>or</div>
+            <div className='center-div'>or</div>
             <div>
               <button
                 type="submit"
