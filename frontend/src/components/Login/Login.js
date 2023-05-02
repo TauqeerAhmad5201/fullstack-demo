@@ -1,6 +1,18 @@
 import React from 'react'
+import { useState } from 'react'
 
 export default function Login() {
+  const [user, setUser] = useState({
+    email: "", 
+    password: "",    
+  })
+ 
+  const handleChange = e => {
+    const {name, value} = e.target    // name and value we are taking from input field
+    console.log(name, value)            // consoling the same
+    setUser({
+      ...user, [name]:value           // now changing the input field name to the value fetch
+    })}
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -20,10 +32,13 @@ export default function Login() {
                 <input
                   id="email"
                   name="email"
+                  value={user.email}
                   type="email"
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -43,10 +58,13 @@ export default function Login() {
                 <input
                   id="password"
                   name="password"
+                  value={user.password}
                   type="password"
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  
+                  onChange={handleChange}
                 />
               </div>
             </div>
