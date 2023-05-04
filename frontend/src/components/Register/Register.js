@@ -22,10 +22,11 @@ export default function Register() {
     }
     const register = () => {
       const {name, email, password, reEnterPassword} = user
-      if( name && password && email && reEnterPassword && (password === reEnterPassword)){
+      if( name && password && email && (password === reEnterPassword)){
         alert('posted')
         // axios.post("http://localhost:9002/register", user)
-      }  else  {
+      }  
+      else  {
         alert('Invalid')
       }
     }
