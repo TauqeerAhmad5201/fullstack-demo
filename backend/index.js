@@ -28,7 +28,7 @@ app.post("/login", (req,res)=>{
 })
 
 app.post("/register", (req,res) => {
-    res.send("My API Register")
+    console.log(req.body)
 })
 
 app.listen(9002, () =>{
