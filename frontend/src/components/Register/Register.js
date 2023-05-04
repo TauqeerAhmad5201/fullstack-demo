@@ -12,12 +12,22 @@ export default function Register() {
     })
    
     const handleChange = e => {
-      const {name, value} = e.target    // name and value we are taking from input field
-      console.log(name, value)            // consoling the same
+      const {name, value} = e.target    // name and value we are taking from input field //name also indicates the current form field we're using
+      console.log(name, value)   
+      console.log({[name]:value})         // consoling the same
       setUser({
-        ...user, [name]:value           // now changing the input field name to the value fetch
+        ...user, [name] : value          // now changing the input field name to the value fetch so to update the setState
       })
 
+    }
+    const register = () => {
+      const {name, email, password, reEnterPassword} = user
+      if( name && password && email && reEnterPassword && (password === reEnterPassword)){
+        alert('posted')
+        // axios.post("http://localhost:9002/register", user)
+      }  else  {
+        alert('Invalid')
+      }
     }
   return (
     <>
@@ -38,7 +48,7 @@ export default function Register() {
               <div className="mt-2">
                 <input
                   id="fname"
-                  name="fullname"
+                  name="name"
                   value={user.name}
                   type="text"
                   placeholder="Your name"
@@ -110,6 +120,7 @@ export default function Register() {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={register}
               >
                 Register
               </button>
