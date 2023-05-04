@@ -1,6 +1,7 @@
 import React from 'react'
 import './Register.css'
 import { useState } from 'react'
+import axios from 'axios'
 
 export default function Register() {
   
@@ -24,7 +25,8 @@ export default function Register() {
       const {name, email, password, reEnterPassword} = user
       if( name && password && email && (password === reEnterPassword)){
         alert('posted')
-        // axios.post("http://localhost:9002/register", user)
+           axios.post("http://localhost:9002/register", user)
+           .then(res => console.log(res))
       }  
       else  {
         alert('Invalid')
