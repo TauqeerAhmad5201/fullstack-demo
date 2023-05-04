@@ -12,10 +12,25 @@ mongoose.connect("mongodb://127.0.0.1:27017/FSDemoDB", {
     useUnifiedTopology : true
 })
 
+// schema 
+const userSchema = mongoose.Schema({
+
+    name: String,
+    email: String,
+    password: String 
+})
+
+const User = new mongoose.model('users',userSchema )  // creating model named users using scchema named userSchema
+
 //Routes 
-app.get("/", (req,res)=>{
+app.post("/login", (req,res)=>{
     res.send("My API")
 })
+
+app.post("/register", (req,res) => {
+    res.send("My API Register")
+})
+
 app.listen(9002, () =>{
     console.log("Be started at port 9002")
 })
