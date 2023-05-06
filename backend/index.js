@@ -29,29 +29,19 @@ app.post("/login", (req,res)=>{
 
 app.post("/register", (req,res) => {
     const { name, email, password } = req.body 
-    User.findOne({email: email}).exec(function(err, user){
-        if(user){
-            res.send({message:"User already registered"})
-        } else {
-            const user = new User({
-                name : name, 
-                email : email,
-                password : password
-            })
-            user.save(err => {
-                if(err) {
-                    res.send(err)
-                } else{
-                    res.send( {message: "Sucessfully registered"} )
-                }
-            })
-        }})    
-    // const findUser = async function(email){
-    //     try { return await User.findOne({email : email})
-    //      }
-    //     catch(err) { console.log(err)}
-    // }
-})
+    User.findOne({email: email}).then((user)=>{    
+            if(user){
+                res.send({message:"User already registered"})
+            } else {
+                const user = new User({
+                    name : name, 
+                    email : email,
+                    password : password
+                })
+                user.save()
+            }     
+       })
+    })
 
     // console.log(req.body)
 
