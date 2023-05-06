@@ -29,8 +29,21 @@ app.post("/login", (req,res)=>{
 
 app.post("/register", async (req,res) => {
     console.log(req.body)
+     const {name, email, password} = req.body
 
+     const data = {
+        email : email, 
+        password : password
+     }
     try {
+        const check = await User.collection.findOne({email:email})
+        
+        if(check){
+            res.json("exist")
+        }
+        else {
+            res.json("Not exist")
+        }
         await User.create({
             name : req.body.name,
             email : req.body.email,
