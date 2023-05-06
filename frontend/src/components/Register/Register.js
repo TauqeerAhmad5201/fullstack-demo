@@ -21,7 +21,8 @@ export default function Register() {
       })
 
     }
-    const register = () => {
+    const register = (e) => {
+      e.preventDefault();
       const {name, email, password, reEnterPassword} = user
       if( name && password && email && (password === reEnterPassword)){
         alert('posted')
