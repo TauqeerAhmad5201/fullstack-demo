@@ -28,9 +28,36 @@ app.post("/login", (req,res)=>{
 })
 
 app.post("/register", (req,res) => {
-    console.log(req.body)
+    const { name, email, password } = req.body 
+    User.findOne({email: email}).exec(function(err, user){
+        if(user){
+            res.send({message:"User already registered"})
+        } else {
+            const user = new User({
+                name : name, 
+                email : email,
+                password : password
+            })
+            user.save(err => {
+                if(err) {
+                    res.send(err)
+                } else{
+                    res.send( {message: "Sucessfully registered"} )
+                }
+            })
+        }})    
+    // const findUser = async function(email){
+    //     try { return await User.findOne({email : email})
+    //      }
+    //     catch(err) { console.log(err)}
+    // }
 })
 
+    // console.log(req.body)
+
+app.get('/', (req,res)=>{
+    res.send('Hello')
+})
 app.listen(9002, () =>{
     console.log("Be started at port 9002")
 })
