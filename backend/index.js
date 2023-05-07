@@ -24,13 +24,14 @@ const User = new mongoose.model('users',userSchema )  // creating model named us
 
 //Routes 
 app.post("/login", async (req,res)=>{
+    // console.log(req.body.email)
     const {email, password} = req.body
     
     try {
         const check = await User.findOne({email:email})
         
         if(check){
-            console.log(check)
+            console.log(check.email, check.password)
         }
         else {
             res.json("Wrong")
