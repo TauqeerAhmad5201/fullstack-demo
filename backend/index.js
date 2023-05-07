@@ -23,32 +23,44 @@ const userSchema = mongoose.Schema({
 const User = new mongoose.model('users',userSchema )  // creating model named users using scchema named userSchema
 
 //Routes 
-app.post("/login", (req,res)=>{
-    res.send("My API")
+app.post("/login", async (req,res)=>{
+    const {email, password} = req.body
+    
+    try {
+        const check = await User.findOne({email:email})
+        
+        if(check){
+            console.log(check)
+        }
+        else {
+            res.json("Wrong")
+        }
+    } catch (err){
+        console.log(err)
+    }
 })
 
 app.post("/register", async (req,res) => {
     console.log(req.body)
      const {name, email, password} = req.body
 
-     const data = {
-        email : email, 
-        password : password
-     }
     try {
-        const check = await User.collection.findOne({email:email})
+        const check = await User.findOne({email:email})
         
         if(check){
-            res.json("exist")
+            res.send({message: "User already registered"})
+            // res.json('Already exist')
         }
         else {
             res.json("Not exist")
+            // await User.insertMany([data])
+            await User.create({
+                name : name,          //req.body.name
+                email : email,
+                password: password
+            })
         }
-        await User.create({
-            name : req.body.name,
-            email : req.body.email,
-            password: req.body.password
-        })
+        
         res.status('ok')
     } catch (err){
         console.log(err)

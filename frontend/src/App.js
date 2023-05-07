@@ -8,8 +8,8 @@ export default function App() {
   return (
     <>
     <div className="App">
-    <Homepage></Homepage>
-    <Register></Register>
+    {/* <Homepage></Homepage> */}
+    {/* <Register></Register> */}
     <Login></Login>
     </div>
     
