@@ -32,6 +32,7 @@ app.post("/login", async (req,res)=>{
         
         if(check){
             console.log(check.email, check.password)
+            res.json("ok")
         }
         else {
             res.json("Wrong")
