@@ -9,8 +9,8 @@ export default function App() {
     <>
     <div className="App">
     {/* <Homepage></Homepage> */}
-    <Register></Register>
-    {/* <Login></Login> */}
+    {/* <Register></Register> */}
+    <Login></Login>
     </div>
     
     </>

@@ -23,34 +23,48 @@ const userSchema = mongoose.Schema({
 const User = new mongoose.model('users',userSchema )  // creating model named users using scchema named userSchema
 
 //Routes 
-app.post("/login", (req,res)=>{
-    res.send("My API")
+app.post("/login", async (req,res)=>{
+    const {email, password} = req.body
+    
+    try {
+        const check = await User.findOne({email:email})
+        
+        if(check){
+            console.log(check)
+        }
+        else {
+            res.json("Wrong")
+        }
+    } catch (err){
+        console.log(err)
+    }
 })
 
-app.post("/register", (req,res) => {
-    const { name, email, password } = req.body 
-    User.findOne({email: email}).exec(function(err, user){
-        if(user){
-            res.send({message:"User already registered"})
-        } else {
-            const user = new User({
-                name : name, 
+app.post("/register", async (req,res) => {
+    console.log(req.body)
+     const {name, email, password} = req.body
+
+    try {
+        const check = await User.findOne({email:email})
+        
+        if(check){
+            res.send({message: "User already registered"})
+            // res.json('Already exist')
+        }
+        else {
+            res.json("Not exist")
+            // await User.insertMany([data])
+            await User.create({
+                name : name,          //req.body.name
                 email : email,
-                password : password
+                password: password
             })
-            user.save(err => {
-                if(err) {
-                    res.send(err)
-                } else{
-                    res.send( {message: "Sucessfully registered"} )
-                }
-            })
-        }})    
-    // const findUser = async function(email){
-    //     try { return await User.findOne({email : email})
-    //      }
-    //     catch(err) { console.log(err)}
-    // }
+        }
+        
+        res.status('ok')
+    } catch (err){
+        console.log(err)
+    }
 })
 
     // console.log(req.body)
