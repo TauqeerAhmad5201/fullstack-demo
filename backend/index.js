@@ -32,9 +32,12 @@ app.post("/login", async (req,res)=>{
         
         if(check){
             console.log(check.email, check.password)
-            res.json("ok")
+            
             if(password === check.password){
-                res.send({message:'Login Successful', user: user})
+                res.send({message:'Login Successful', user: check})
+            }
+            else {
+                res.send('User not registered')
             }
         }
         else {
