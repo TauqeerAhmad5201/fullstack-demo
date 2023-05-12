@@ -1,6 +1,7 @@
 import React from 'react'
 import './Register.css'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 export default function Register() {
@@ -33,6 +34,11 @@ export default function Register() {
         alert('Invalid')
       }
     }
+    let navigate = useNavigate()
+
+    const navtoLogin = () => {
+      navigate('/login')
+   }
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -134,6 +140,7 @@ export default function Register() {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={navtoLogin}
               >
                 Login
               </button>
