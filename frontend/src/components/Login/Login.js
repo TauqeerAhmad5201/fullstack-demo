@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 export default function Login() {
@@ -20,6 +21,11 @@ export default function Login() {
       axios.post("http://localhost:9002/login", user)
       .then(res => console.log(res))
     }
+    let navigate = useNavigate()
+
+    const navtoRegister = () => {
+      navigate('/register')
+   }
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -49,18 +55,10 @@ export default function Login() {
                 />
               </div>
             </div>
-
             <div>
-              <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Password
-                </label>
-                <div className="text-sm">
-                  <a href="gogle.com" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </a>
-                </div>
-              </div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                Password
+              </label>
               <div className="mt-2">
                 <input
                   id="password"
@@ -75,15 +73,24 @@ export default function Login() {
                 />
               </div>
             </div>
-            <div className='center-div'>or</div>
-            <div>
+          
+            <div >
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={login}
               >
-                Login 
+                Login
               </button>
+              <div>
+              <button
+              
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-8"
+                onClick={navtoRegister}
+              >
+                Register
+              </button>
+            </div>
             </div>
           </form>
         </div>
