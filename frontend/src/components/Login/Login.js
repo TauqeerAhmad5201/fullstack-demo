@@ -3,12 +3,13 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-export default function Login() {
+export default function Login({setLoginUser}) {
   const [user, setUser] = useState({
     email: "", 
     password: "",    
   })
- 
+  let navigate = useNavigate()    // object for useNavigate()
+
   const handleChange = e => {
     const {name, value} = e.target    // name and value we are taking from input field
     console.log(name, value)            // consoling the same
@@ -19,9 +20,14 @@ export default function Login() {
     const login = (e) => {
       e.preventDefault();
       axios.post("http://localhost:9002/login", user)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        alert(res.data.message)
+        setLoginUser(res.data.user)        // res always contains data as object and then user in it. // now user can be passed to prop of Login
+        navigate('/')
+      })
     }
-    let navigate = useNavigate()
+  
 
     const navtoRegister = () => {
       navigate('/register')
@@ -77,7 +83,7 @@ export default function Login() {
             <div >
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"  onClick={login}
               >
                 Login
               </button>
